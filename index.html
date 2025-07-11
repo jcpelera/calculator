@@ -9,35 +9,35 @@
 <body>
     <div id="glass-text-container">JC's Calculator</div>
     <div id="container">
-        <div id="display">999999999</div>
+        <div id="display"></div>
         <div id="button-container">
         <div id="delete-container">
         <button id="all-clear">AC</button>
         <button id="delete">DEL</button>
         </div>
         <div class="calc-rows">
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
-            <button id="divide">/</button>
+            <button id="seven" onclick="appendNumber(7)">7</button>
+            <button id="eight" onclick="appendNumber(8)">8</button>
+            <button id="nine" onclick="appendNumber(9)">9</button>
+            <button id="divide" onclick="setOperator('/')">/</button>
         </div>
         <div class="calc-rows">
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
-            <button id="multiply">x</button>
+            <button id="four" onclick="appendNumber(4)">4</button>
+            <button id="five" onclick="appendNumber(5)">5</button>
+            <button id="six" onclick="appendNumber(6)">6</button>
+            <button id="multiply" onclick="setOperator('*')">x</button>
         </div>
         <div class="calc-rows">
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
-            <button id="minus">-</button>
+            <button id="one" onclick="appendNumber(1)">1</button>
+            <button id="two" onclick="appendNumber(2)">2</button>
+            <button id="three" onclick="appendNumber(3)">3</button>
+            <button id="minus" onclick="setOperator('-')">-</button>
         </div>
         <div class="calc-rows">
-            <button id="zero">0</button>
-            <button id="decimal">.</button>
-            <button id="equals">=</button>
-            <button id="plus">+</button>
+            <button id="zero" onclick="appendNumber(0)">0</button>
+            <button id="decimal" onclick="appendNumber('.')">.</button>
+            <button id="equals" onclick="calculate()">=</button>
+            <button id="plus" onclick="setOperator('+')">+</button>
         </div>
         </div>
     </div>

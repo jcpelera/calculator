@@ -56,6 +56,9 @@ h1{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     font-family: 'Droid Serif', Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 button{
     display: flex;
@@ -72,6 +75,7 @@ button{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 26px;
     color: rgb(0, 0, 0, 0.75);
+    border-style: inset;
 }
 #button-container{
     margin: 10px;
