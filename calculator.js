@@ -6,66 +6,66 @@ let operator = null;
 function updateDisplay(text){
     document.getElementById("display").textContent = text;
 }
-function add(a,b){
-    return a + b;
-}
-
-function minus(a,b){
-    return a-b;
-}
-
-function multiply(a,b){
-    return a*b;
-}
-
-function divide(a,b){
-    return a/b;
-}
-
 
 function clearDisplay(){
     //display.textContent = '';
     currDisplay = '';
     initialNumber = null;
+    secondNumber = null;
     operator = null; 
     updateDisplay('')
 }
 
 function setOperator(symbol){
-    if(currDisplay === '') return; 
-
-    initialNumber = parseFloat(currDisplay);
+    if(currDisplay === '' && initialNumber !== null){
     operator = symbol;
-    currDisplay ='';
-}
-function calculate(){
-    if(initialNumber === null || operator === null || currDisplay === '') return;
-    let secondNumber = currDisplay;
-    let result;
-    switch(operator){
-        case '+': {
-            result = add(initialNumber, secondNumber);
-            break;
-        }
-        case '-': {
-            result = minus(leftOperand, rightOperand);
-            break;
-        }
-        case '*': {
-            result = multiply(leftOperand, rightOperand);
-            break;
-        }
-        case '/': {
-            if(rightOperand != 0){
-                result = divide(leftOperand, rightOperand);
-            } else {
-                alert("Really? Dividing by zero?");
-                resetVals();
-                result = 0;
-            }
+    return;
+    } 
+    if(currDisplay !== ''){
+        const secondNumber = parseFloat(currDisplay);
+        if(initialNumber === null){
+            initialNumber = secondNumber;
+        }else if (operator){
+        initialNumber = operate(initialNumber, secondNumber, operator);
+        updateDisplay(initialNumber);
         }
     }
-    return result;
+    operator = symbol;
+    currDisplay ='';
+    
+}
+function operate(lOperand, rOperand, operator){
+    switch(operator){
+        case '+': 
+            return lOperand + rOperand;
+        case '-': 
+            return lOperand - rOperand;
+        case '*': 
+            return lOperand * rOperand;
+        case '/': 
+            if(rOperand != 0){
+                return parseFloat(lOperand / rOperand);
+            } else {
+                alert("Really? Dividing by zero?");
+                clearDisplay();
+                return;
+            }
+        default: 
+            return;
+    }
+}
+
+function calculate(){
+    if(initialNumber === null || operator === null || currDisplay === '') return;
+    let secondNumber = parseFloat(currDisplay);
+    let result = (operate(initialNumber, secondNumber, operator)).toFixed(2);
+    
+    updateDisplay(result);
+    currDisplay = result.toString();
+    initialNumber = null;
+    secondNumber = null;
+    operator = null;
+
 }
 //All clear Key 
 const allClearKey = document.querySelector("#all-clear");
