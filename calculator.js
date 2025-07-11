@@ -6,9 +6,8 @@ let operator = null;
 function updateDisplay(text){
     document.getElementById("display").textContent = text;
 }
-
+//clear display and reset values
 function clearDisplay(){
-    //display.textContent = '';
     currDisplay = '';
     initialNumber = null;
     secondNumber = null;
@@ -16,6 +15,7 @@ function clearDisplay(){
     updateDisplay('')
 }
 
+//identifies the proper operation and supports chaining operations (e.g 5+5+5)
 function setOperator(symbol){
     if(currDisplay === '' && initialNumber !== null){
     operator = symbol;
@@ -34,6 +34,8 @@ function setOperator(symbol){
     currDisplay ='';
     
 }
+
+//returns the results of the operation
 function operate(lOperand, rOperand, operator){
     switch(operator){
         case '+': 
@@ -54,7 +56,7 @@ function operate(lOperand, rOperand, operator){
             return;
     }
 }
-
+//provides
 function calculate(){
     if(initialNumber === null || operator === null || currDisplay === '') return;
     let secondNumber = parseFloat(currDisplay);
@@ -74,20 +76,15 @@ allClearKey.addEventListener("click", () => {
 });
 
 //Delete Key
-const deleteKey = document.querySelector("#delete");
-deleteKey.addEventListener("click", () => {
+function backspace(){
     currDisplay = currDisplay.slice(0, -1);
     updateDisplay(currDisplay);
-});
+}
 let clickEvent = new MouseEvent('click', {
     bubbles: true,
     cancelable: true
 });
-
-function resetVals(){
-    initialNumber = null; 
-    operator = null; 
-}
+//puts the number or '.' in the display
 function appendNumber(num){
     if(num === '.' && currDisplay.includes('.')) return;
     if(num === '.' && currDisplay === ''){
@@ -98,3 +95,18 @@ function appendNumber(num){
         display.textContent = currDisplay;
     }
 }
+//keyboard support
+window.addEventListener("keydown", function (e) {
+    let choiceKey = e.key;
+    if(!isNaN(choiceKey)){
+        appendNumber(choiceKey);
+    } else if (choiceKey === '+' || choiceKey === '-' || choiceKey === '*' || choiceKey === '/'){
+        setOperator(choiceKey);
+    } else if (choiceKey === '=' || choiceKey === 'Enter'){
+        calculate();
+    } else if (choiceKey === 'Backspace'){
+        backspace();
+    } else if (choiceKey === 'c' || choiceKey === 'C'){
+        clearDisplay();
+    }
+});
